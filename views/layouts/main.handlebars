@@ -3,9 +3,33 @@
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <link rel='stylesheet' href='/css/reset.css' />
+    <link rel='stylesheet' href='/css/style.css' />
     <title>Document</title>
   </head>
   <body>
+    <header class='navbar flex-center'>
+      <h1 class='nav-title'>TECH JAB IO</h1>
+      <nav aria-labelledby='primary-navigation-label' id='primary-navigation'>
+        <span class='sr-only' id='primary-navigation-label'>Main Navigation</span>
+        <ul>
+          <li>
+            <a class='nav-link rounded' href='/'>Home</a>
+          </li>
+          <li>
+            <a class='nav-link rounded' href='/dashboard'>Dashboard</a>
+          </li>
+          {{#if loggedIn}}
+            <li>
+              <button class='nav-link rounded' href='/logout'>Logout</button>
+            </li>
+          {{else}}
+            <li>
+              <a class='nav-link rounded' href='/login'>Login</a>
+            </li>
+          {{/if}}
+        </ul>
+      </nav>
+    </header>
     {{{body}}}
   </body>
 </html>
