@@ -12,7 +12,7 @@
   ],
   "main": "server.js",
   "scripts": {
-    "test": "jest",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "dev": "nodemon server.js -e js,handlebars,css,html",
     "tw:build": "tailwindcss build ./tw.css -o ./public/css/tw.css",
@@ -30,7 +30,6 @@
     "sequelize": "^6.32.1"
   },
   "devDependencies": {
-    "jest": "^29.6.1",
     "nodemon": "^3.0.1",
     "tailwindcss": "^3.3.2"
   }
