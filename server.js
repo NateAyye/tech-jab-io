@@ -1,9 +1,12 @@
 const express = require('express');
-const path = require('path');
 const app = express();
+const path = require('path');
 const exphbs = require('express-handlebars');
-const hbs = exphbs.create({});
+const sequelize = require('./config/connection');
+
 const PORT = process.env.PORT || 5000;
+
+const hbs = exphbs.create({});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -17,4 +20,6 @@ app.get('/', (req, res) => {
   res.render('home');
 });
 
-app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
+});
