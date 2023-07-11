@@ -1,35 +1,51 @@
-<html lang='en'>
+<html class='font-segoe h-full bg-light-100' lang='en'>
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <link rel='stylesheet' href='/css/reset.css' />
-    <link rel='stylesheet' href='/css/style.css' />
-    <title>Document</title>
+    <link rel='stylesheet' href='/css/tw.css' />
+    <title>Tech Jab IO</title>
   </head>
   <body>
-    <header class='navbar flex-center'>
-      <h1 class='nav-title'>TECH JAB IO</h1>
-      <nav aria-labelledby='primary-navigation-label' id='primary-navigation'>
-        <span class='sr-only' id='primary-navigation-label'>Main Navigation</span>
-        <ul>
-          <li>
-            <a class='nav-link rounded' href='/'>Home</a>
-          </li>
-          <li>
-            <a class='nav-link rounded' href='/dashboard'>Dashboard</a>
-          </li>
-          {{#if loggedIn}}
+    <header class='flex justify-center items-center bg-light-300'>
+      <div class='flex justify-between w-full max-w-screen-2xl my-3 mx-5'>
+        <h1 class='text-2xl font-bold text-secondary-main'>TECH JAB IO</h1>
+        <nav
+          class='flex items-center'
+          aria-labelledby='primary-navigation-label'
+          id='primary-navigation'
+        >
+          <span class='sr-only' id='primary-navigation-label'>Main Navigation</span>
+          <ul class='list-none font-mono font-semibold text-lg flex gap-5'>
             <li>
-              <button class='nav-link rounded' href='/logout'>Logout</button>
+              <a class='link focus-ring rounded-sm px-2 py-1' href='/'>Home</a>
             </li>
-          {{else}}
             <li>
-              <a class='nav-link rounded' href='/login'>Login</a>
+              <a
+                class='link focus-ring rounded-sm px-2 py-1'
+                href='/dashboard'
+              >Dashboard</a>
             </li>
-          {{/if}}
-        </ul>
-      </nav>
+            {{#if loggedIn}}
+              <li>
+                <button
+                  class='link focus-ring text-blue-200 rounded-sm px-2 py-1'
+                  href='/logout'
+                >Logout</button>
+              </li>
+            {{else}}
+              <li>
+                <a
+                  class='link focus-ring rounded-sm px-2 py-1'
+                  href='/login'
+                >Login</a>
+              </li>
+            {{/if}}
+          </ul>
+        </nav>
+      </div>
     </header>
-    {{{body}}}
+    <main class='mx-auto mt-3 max-w-screen-xl'>
+      {{{body}}}
+    </main>
   </body>
 </html>
