@@ -1,16 +1,23 @@
 {
   "name": "tech-jab-10-blog",
   "version": "1.0.0",
+  "author": "Nathan Cuevas",
   "description": "## Tech Blog for anything tech related",
+  "license": "MIT",
+  "keywords": [
+    "Blog",
+    "express",
+    "sequelize",
+    "Tech"
+  ],
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node server.js",
-    "dev": "nodemon server.js -e js,handlebars,css,html"
+    "dev": "nodemon server.js -e js,handlebars,css,html",
+    "tw:build": "tailwindcss build ./tw.css -o ./public/css/tw.css",
+    "tw:dev": "tailwindcss build ./tw.css -o ./public/css/tw.css -w"
   },
-  "keywords": [],
-  "author": "Nathan Cuevas",
-  "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "connect-session-sequelize": "^7.1.7",
@@ -23,6 +30,8 @@
     "sequelize": "^6.32.1"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "jest": "^29.6.1",
+    "nodemon": "^3.0.1",
+    "tailwindcss": "^3.3.2"
   }
 }
