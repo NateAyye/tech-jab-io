@@ -16,9 +16,8 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
-app.get('/', (req, res) => {
-  res.render('home');
-});
+// Set up routes
+app.use(require('./controllers'));
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
