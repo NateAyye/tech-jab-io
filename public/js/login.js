@@ -1,4 +1,6 @@
-async function loginUser() {
+async function loginUser(e) {
+  e.preventDefault();
+  const responseEl = document.getElementById('api-response');
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value.trim();
 
@@ -9,11 +11,22 @@ async function loginUser() {
     },
     body: JSON.stringify({ email, password }),
   });
+  const data = await response.json();
+  
   if (response.ok) {
-    const data = await response.json();
-    console.log(data);
-    location.replace('/');
+    responseEl.classList.add('!text-success-main');
+    responseEl.textContent = 'Logged in successfully!!';
+    setTimeout(() => {
+      responseEl.innerHTML = '&ThickSpace;';
+      location.replace('/');
+    }, [1500]);
   } else {
-    alert('Something went wrong');
+    responseEl.classList.remove('!text-success-main');
+    responseEl.textContent = data.message;
+    setTimeout(() => {
+      responseEl.innerHTML = '&ThickSpace;';
+    }, [3000]);
   }
 }
+
+document.getElementById('login-form')?.addEventListener('submit', loginUser);

@@ -32,8 +32,8 @@
             {{#if loggedIn}}
               <li>
                 <button
-                  class='link focus-ring text-blue-200 rounded-sm px-2 py-1'
-                  href='/logout'
+                  class='link focus-ring rounded-sm px-2 py-1'
+                  id="logout-button"
                 >Logout &rightarrow;</button>
               </li>
             {{else}}
@@ -45,6 +45,7 @@
               </li>
             {{/if}}
           </ul>
+          <script src="/js/logout.js"></script>
         </nav>
       </div>
     </header>

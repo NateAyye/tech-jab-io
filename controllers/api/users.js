@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { User } = require('../../models');
 const api = require('../../utils/api');
 
 router.post('/sign-up', async (req, res) => {
@@ -26,8 +25,8 @@ router.post('/sign-up', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
-  const foundUser = await api.getUserByEmail(email);
-
+  console.log(email, password);
+  const foundUser = await api.getUserByEmail(email, false);
   if (!foundUser)
     return res.status(409).json({ message: 'No User with that Email' });
 
@@ -47,13 +46,13 @@ router.post('/login', async (req, res) => {
   });
 });
 
-router.get('/logout', (req, res) => {
-  if (res.session.loggedIn) {
-    res.session.destroy(() => {
-      res.status(204).end();
+router.post('/logout', (req, res) => {
+  if (req?.session?.loggedIn) {
+    req.session.destroy(() => {
+      return res.status(204).json({ message: 'Logged out successfully' });
     });
   } else {
-    res.status(404).end();
+    return res.status(404).json({ message: 'No session to end' });
   }
 });
 

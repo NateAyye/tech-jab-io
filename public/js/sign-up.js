@@ -13,18 +13,16 @@ async function signUpUser(e) {
     body: JSON.stringify({ first_name, email, password }),
   });
   const message = (await response.json()).message;
-  console.log(message);
+
   if (response.ok) {
-    responseEl.classList.remove('text-success-main');
-    responseEl.classList.add('text-danger-main');
+    responseEl.classList.add('!text-success-main');
     responseEl.textContent = message;
     setTimeout(() => {
       responseEl.innerHTML = '&ThickSpace;';
       location.replace('/');
     }, [1500]);
   } else {
-    responseEl.classList.remove('text-danger-main');
-    responseEl.classList.add('text-success-main');
+    responseEl.classList.remove('!text-success-main');
     responseEl.textContent = message;
     setTimeout(() => {
       responseEl.innerHTML = '&ThickSpace;';
