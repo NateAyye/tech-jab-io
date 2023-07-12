@@ -1,5 +1,74 @@
-<h1>Home</h1>
-<script>
-  (async () => { const test = await fetch('/'); console.log(await test.text());
-  })()
-</script>
+<div class='grid grid-cols-1 gap-8 lg:grid-cols-4 px-8'>
+  <section class='lg:col-span-3'>
+    <h2
+      class='text-3xl font-sans font-bold text-start indent-6 first-letter:text-4xl mb-4 underline underline-offset-2 decoration-dark-400 decoration-4'
+    >Most Recent Posts</h2>
+    <div
+      class='grid gap-5 grid-cols-1 grid-rows-[masonry] sm:grid-cols-2 lg:grid-cols-3'
+    >
+      {{#each posts}}
+        <article
+          class='bg-light-100 rounded-lg shadow-lg h-fit px-8 py-3 space-y-5 sm:first:col-span-2 lg:first:col-span-3 group'
+        >
+          <div>
+            <a href='/posts/{{id}}'>
+              <h3
+                class='text-xl text-dark-400 font-bold group-first-of-type:text-3xl hover:underline hover:underline-offset-2 hover:decoration-2'
+              >{{title}}</h3>
+            </a>
+            <small
+              class='text-secondary-main/75 text-sm/9 font-medium'
+            >{{format_date_lg createdAt}}</small>
+          </div>
+          <p
+            class='text-balance text-secondary-disabled indent-3 group-first-of-type:font-semibold group-first-of-type:text-lg group-first-of-type:text-dark-300'
+          >
+            {{#if @first}}
+              {{body}}
+            {{else}}
+              {{format_body_random body}}
+            {{/if}}</p>
+          <footer class='flex items-center gap-5'>
+            <a
+              class='rounded-full overflow-clip hover:ring-2 hover:ring-primary-main transition-all duration-150 ease-in-out group-first-of-type:ring-info-main'
+              href='/users/{{user.username}}'
+            >
+              <img
+                class='w-9 h-9'
+                alt="{{user.username}}\'s Avatar"
+                src='{{user.avatar}}'
+              />
+            </a>
+            <div class='flex flex-col'>
+              <a
+                href='/users/{{user.username}}'
+                class='text-sm font-bold text-secondary-disabled hover:text-secondary-hover hover:underline'
+              >{{user.first_name}} {{user.last_name}}</a>
+              <small
+                class='text-xs font-medium text-secondary-main'
+              >@{{user.username}}</small>
+            </div>
+          </footer>
+        </article>
+      {{/each}}
+    </div>
+  </section>
+
+  <section class='h-fit sticky top-0'>
+    <div class='mt-9'>
+      <div class=''>
+        <h1 class='text-4xl font-bold text-center'>Welcome to Tech Jab
+          <p class='inline text-4xl font-bold text-center font-consolas'>I0</p>
+        </h1>
+        <p class='text-start'>This is a simple web application built with
+          Node.js, Express, and Handlebars.</p>
+        <p class='text-start'>It uses MySQL w/ sequelize(JAWSDB when deployed on
+          heroku) for the database and Express-Session(w/
+          connect-session-sequelize) for authentication.</p>
+        <p class='text-start'>It also uses Tailwind CSS for styling.</p>
+        <p class='text-start'>The source code is available on
+          <a href=''>GitHub</a>.</p>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,12 +1,13 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const helpers = require('./utils/hbsHelpers');
 const exphbs = require('express-handlebars');
 const sequelize = require('./config/connection');
 
 const PORT = process.env.PORT || 5000;
 
-const hbs = exphbs.create({});
+const hbs = exphbs.create({ helpers });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

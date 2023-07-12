@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         segoe: ['Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        consolas: ['Consolas', 'monospace'],
       },
       colors: {
         primary: {
