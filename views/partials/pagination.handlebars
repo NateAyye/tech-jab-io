@@ -1,0 +1,46 @@
+<div>
+  <ul class='flex bg-white rounded-lg overflow-clip'>
+    <li
+      {{#if firstPage}}
+        class='w-9 h-9 flex justify-center bg-light-300 font-bold text-secondary-main items-center'
+      {{else}}
+        class='w-9 h-9 flex justify-center items-center  font-sans text-lg text-primary-main'
+      {{/if}}
+    >
+      <a
+        {{#if firstPage}}
+          class='font-sans text-lg'
+        {{else}}
+          href='/?page={{prev_page page}}'  
+        {{/if}}
+      >&blacktriangleleft;</a>
+    </li>
+    {{#each pagination}}
+      <li
+        {{#if active}}
+          class='w-9 h-9 flex justify-center bg-light-200 font-bold underline text-primary-main items-center border-r'
+        {{else}}
+          class='w-9 h-9 flex justify-center items-center border-r font-sans text-lg text-primary-hover'
+        {{/if}}
+      >
+        <a href='/?page={{page}}' class='font-sans text-lg'>{{page}}</a>
+      </li>
+    {{/each}}
+      <li
+        {{#if lastPage}}
+          class='w-9 h-9 flex justify-center bg-light-300 font-bold text-secondary-main items-center '
+        {{else}}
+          class='w-9 h-9 flex justify-center items-center  font-sans text-lg text-primary-main'
+        {{/if}}
+      >
+        <a
+          {{#if lastPage}}
+            class='font-sans text-lg'
+          {{else}}
+            href='/?page={{next_page page}}'
+            class='font-sans text-lg'
+          {{/if}}
+        >&blacktriangleright;</a>
+      </li>
+  </ul>
+</div>

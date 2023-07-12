@@ -1,8 +1,8 @@
+<h2
+  class='text-3xl font-sans font-bold text-start indent-6 first-letter:text-4xl mb-4 underline underline-offset-2 decoration-dark-400 decoration-4'
+>Most Recent Posts</h2>
 <div class='grid grid-cols-1 gap-8 lg:grid-cols-4 px-8'>
   <section class='lg:col-span-3'>
-    <h2
-      class='text-3xl font-sans font-bold text-start indent-6 first-letter:text-4xl mb-4 underline underline-offset-2 decoration-dark-400 decoration-4'
-    >Most Recent Posts</h2>
     <div
       class='grid gap-5 grid-cols-1 grid-rows-[masonry] sm:grid-cols-2 lg:grid-cols-3'
     >
@@ -28,7 +28,7 @@
             {{else}}
               {{format_body_random body}}
             {{/if}}</p>
-          <footer class='flex items-center gap-5'>
+          <div class='flex items-center gap-5'>
             <a
               class='rounded-full overflow-clip hover:ring-2 hover:ring-primary-main transition-all duration-150 ease-in-out group-first-of-type:ring-info-main'
               href='/users/{{user.username}}'
@@ -48,27 +48,114 @@
                 class='text-xs font-medium text-secondary-main'
               >@{{user.username}}</small>
             </div>
+          </div>
+          <footer class='flex justify-between items-center'>
+              <a
+                href='/post/{{id}}#comment-form'
+                class='flex justify-center items-center w-6 h-6 rounded-full text-secondary-main hover:text-secondary-hover hover:drop-shadow-sm'
+              >
+                <i class='fa-regular fa-comment'></i>
+              </a>
+              <div class='flex gap-8 items-center'>
+
+                <button
+                  onclick='likePost({{id}})'
+                  data-post-likes='{{likes}}'
+                  data-post-id='{{id}}'
+                  class='flex justify-center items-center w-6 h-6 rounded-full text-secondary-main hover:text-secondary-hover hover:drop-shadow-sm'
+                >
+                  <small>{{likes}}&ThickSpace;</small>
+                  <i class='fa-regular fa-thumbs-up -translate-y-[1px]'></i>
+                </button>
+                <button
+                  onclick='dislikePost({{id}})'
+                  data-post-dislikes='{{dislikes}}'
+                  data-post-id='{{id}}'
+                  class='flex justify-center items-center w-6 h-6 rounded-full text-secondary-main hover:text-secondary-hover hover:drop-shadow-sm'
+                >
+                  <small>{{dislikes}}&ThickSpace;</small>
+                  <i class='fa-regular fa-thumbs-down translate-y-[1px]'></i>
+                </button>
+              </div>
           </footer>
         </article>
       {{/each}}
     </div>
+
+    <script src='/js/postLikes.js'></script>
+
+    <div class='col-span-full mt-6 flex justify-end'>
+      {{> pagination}}
+    </div>
   </section>
 
-  <section class='h-fit sticky top-0'>
-    <div class='mt-9'>
-      <div class=''>
-        <h1 class='text-4xl font-bold text-center'>Welcome to Tech Jab
-          <p class='inline text-4xl font-bold text-center font-consolas'>I0</p>
-        </h1>
-        <p class='text-start'>This is a simple web application built with
-          Node.js, Express, and Handlebars.</p>
-        <p class='text-start'>It uses MySQL w/ sequelize(JAWSDB when deployed on
-          heroku) for the database and Express-Session(w/
-          connect-session-sequelize) for authentication.</p>
-        <p class='text-start'>It also uses Tailwind CSS for styling.</p>
-        <p class='text-start'>The source code is available on
-          <a href=''>GitHub</a>.</p>
-      </div>
+  <section class='h-fit sticky top-5 px-5 py-3 rounded-lg bg-white'>
+    <div class=''>
+      <section>
+        <h4 class='text-2xl font-bold text-center'>Welcome to Tech Jab
+          <p class='inline text-3xl font-bold text-center font-consolas'>I0</p>
+        </h4>
+        <ul class='text-secondary-main my-5'>
+          <li>A place to share your thoughts and ideas.</li>
+          <li>A place to learn and grow.</li>
+          <li>A place to connect with others.</li>
+        </ul>
+      </section>
+      <section>
+        <h4 class='text-xl font-semibold'>About The Stack</h4>
+        <p class='text-sm text-secondary-main'>I have taken the route of staying
+          on the server side mainly and to render all my pages using the MVC
+          Pattern.</p>
+        <ul>
+          <li>(M) - MySQL w/sequelize as an ORM</li>
+          <li>(E) - Express.js</li>
+          <li>(H) - Handlebars.js</li>
+          <li>(N) - Node.js</li>
+        </ul>
+        <p class='text-sm text-secondary-main'>I have also used Tailwind CSS for
+          styling and a little bit of vanilla JavaScript for some of the
+          functionality.</p>
+      </section>
+      <section class='flex justify-between'>
+        <div class="flex justify-center items-center gap-3">
+          <a
+            target="_blank"
+            title='MySQL Server Download'
+            href='https://dev.mysql.com/downloads/mysql/'
+          >
+            <i class='link fa-solid fa-database'></i>
+          </a>
+          <a
+            target="_blank"
+            title='Express.js'
+            href='https://expressjs.com/'
+          >
+            <i class="link fa-brands fa-node-js"></i>
+          </a>
+          <a
+            target="_blank"
+            title='Handlebars.js'
+            href='https://handlebarsjs.com/'
+          >
+            <i class="link fa-solid fa-h"></i>
+          </a>
+          <a
+            target="_blank"
+            title='Node.js Download'
+            href='https://nodejs.org/en'
+          >
+            <i class="link fa-brands fa-node"></i>
+          </a>
+        </div>
+
+        <a
+          target="_blank"
+          title='See Source Code Here'
+          href='https://github.com/NateAyye/tech-jab-io-blog'
+        >
+          <i class='link fa fa-github'></i>
+        </a>
+      </section>
     </div>
   </section>
 </div>
