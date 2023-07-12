@@ -82,7 +82,15 @@ class ApiHelpers {
             model: User,
             attributes: { exclude: excludePassword ? ['password'] : null },
           },
-          { model: Comment },
+          {
+            model: Comment,
+            include: [
+              {
+                model: User,
+                attributes: { exclude: excludePassword ? ['password'] : null },
+              },
+            ],
+          },
         ],
       });
       return posts;
@@ -101,7 +109,15 @@ class ApiHelpers {
             model: User,
             attributes: { exclude: excludePassword ? ['password'] : null },
           },
-          { model: Comment },
+          {
+            model: Comment,
+            include: [
+              {
+                model: User,
+                attributes: { exclude: excludePassword ? ['password'] : null },
+              },
+            ],
+          },
         ],
       });
       return post;
@@ -149,7 +165,15 @@ class ApiHelpers {
             model: User,
             attributes: { exclude: excludePassword ? ['password'] : null },
           },
-          { model: Post },
+          {
+            model: Post,
+            include: [
+              {
+                model: User,
+                attributes: { exclude: excludePassword ? ['password'] : null },
+              },
+            ],
+          },
         ],
       });
       return comments;
@@ -168,7 +192,15 @@ class ApiHelpers {
             model: User,
             attributes: { exclude: excludePassword ? ['password'] : null },
           },
-          { model: Post },
+          {
+            model: Post,
+            include: [
+              {
+                model: User,
+                attributes: { exclude: excludePassword ? ['password'] : null },
+              },
+            ],
+          },
         ],
       });
       return comment;
