@@ -96,6 +96,13 @@ const posts = [
     dislikes: 1,
     user_id: 15,
   },
+  {
+    title: 'The Art of Creative Writing',
+    body: 'Writing is a form of self-expression that allows me to share my thoughts and feelings with the world. Whether it’s a poem, a short story, or a personal essay, each piece is a reflection of my unique perspective. It’s a passion that has helped me grow as a person.',
+    likes: 3,
+    dislikes: 2,
+    user_id: 16,
+  },
 ];
 
 const seedPosts = async () => await Post.bulkCreate(posts);

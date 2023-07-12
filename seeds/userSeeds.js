@@ -1,89 +1,104 @@
-const { User } = require("../models");
+const { User } = require('../models');
 
 const users = [
   {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    password: "johndoe123",
-    username: "johndoe"
+    first_name: 'John',
+    last_name: 'Doe',
+    email: 'john.doe@example.com',
+    password: 'johndoe123',
+    username: 'johndoe',
   },
   {
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    password: "janesmith456",
-    username: "janesmith"
+    first_name: 'Jane',
+    last_name: 'Smith',
+    email: 'jane.smith@example.com',
+    password: 'janesmith456',
   },
   {
-    name: "Alex Johnson",
-    email: "alex.johnson@example.com",
-    password: "alexjohnson789"
+    first_name: 'Alex',
+    last_name: 'Johnson',
+    email: 'alex.johnson@example.com',
+    password: 'alexjohnson789',
   },
   {
-    name: "Emily Davis",
-    email: "emily.davis@example.com",
-    password: "emilydavis321",
-    username: "emilyd"
+    first_name: 'Emily',
+    last_name: 'Davis',
+    email: 'emily.davis@example.com',
+    password: 'emilydavis321',
+    username: 'emilyd',
   },
   {
-    name: "Michael Brown",
-    email: "michael.brown@example.com",
-    password: "michaelbrown654"
+    first_name: 'Michael',
+    last_name: 'Brown',
+    email: 'michael.brown@example.com',
+    password: 'michaelbrown654',
   },
   {
-    name: "Sophia Wilson",
-    email: "sophia.wilson@example.com",
-    password: "sophiawilson987",
-    username: "sophiaw"
+    first_name: 'Sophia',
+    last_name: 'Wilson',
+    email: 'sophia.wilson@example.com',
+    password: 'sophiawilson987',
+    username: 'sophiaw',
   },
   {
-    name: "Daniel Taylor",
-    email: "daniel.taylor@example.com",
-    password: "danieltaylor123"
+    first_name: 'Daniel',
+    email: 'daniel.taylor@example.com',
+    password: 'danieltaylor123',
   },
   {
-    name: "Olivia Anderson",
-    email: "olivia.anderson@example.com",
-    password: "oliviaanderson456",
-    username: "oliviaa"
+    first_name: 'Olivia',
+    last_name: 'Anderson',
+    email: 'olivia.anderson@example.com',
+    password: 'oliviaanderson456',
+    username: 'oliviaa',
   },
   {
-    name: "David Martinez",
-    email: "david.martinez@example.com",
-    password: "davidmartinez789"
+    first_name: 'David',
+    last_name: 'Martinez',
+    email: 'david.martinez@example.com',
+    password: 'davidmartinez789',
   },
   {
-    name: "Emma Davis",
-    email: "emma.davis@example.com",
-    password: "emmadavis321",
-    username: "emmad"
+    first_name: 'Emma',
+    email: 'emma.davis@example.com',
+    password: 'emmadavis321',
   },
   {
-    name: "Christopher Thompson",
-    email: "christopher.thompson@example.com",
-    password: "christopherthompson654"
+    first_name: 'Christopher',
+    last_name: 'Thompson',
+    email: 'christopher.thompson@example.com',
+    password: 'christopherthompson654',
   },
   {
-    name: "Isabella Harris",
-    email: "isabella.harris@example.com",
-    password: "isabellaharris987",
-    username: "isabellah"
+    first_name: 'Isabella',
+    last_name: 'Harris',
+    email: 'isabella.harris@example.com',
+    password: 'isabellaharris987',
+    username: 'isabellah',
   },
   {
-    name: "Ethan Wilson",
-    email: "ethan.wilson@example.com",
-    password: "ethanwilson123"
+    first_name: 'Ethan',
+    last_name: 'Wilson',
+    email: 'ethan.wilson@example.com',
+    password: 'ethanwilson123',
   },
   {
-    name: "Ava Thomas",
-    email: "ava.thomas@example.com",
-    password: "avathomas456",
-    username: "avat"
+    first_name: 'Ava',
+    email: 'ava.thomas@example.com',
+    password: 'avathomas456',
+    username: 'avat',
   },
   {
-    name: "James Johnson",
-    email: "james.johnson@example.com",
-    password: "jamesjohnson789"
-  }
+    first_name: 'James',
+    email: 'james.johnson@example.com',
+    password: 'jamesjohnson789',
+  },
+  {
+    first_name: 'Mia',
+    last_name: 'Jackson',
+    email: 'miaj@example.com',
+    password: 'miajackson321',
+  },
 ];
 
 const seedUsers = async () => await User.bulkCreate(users);

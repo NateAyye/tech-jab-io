@@ -112,7 +112,7 @@ User.init(
       defaultValue: () => {
         return `${
           RANDOM_NAMES[Math.floor(Math.random() * RANDOM_NAMES.length)]
-        }-${Math.floor(Math.random() * 10000)}}`;
+        }-${Math.floor(Math.random() * 10000)}`;
       },
     },
     // Define a Avatar column
@@ -124,9 +124,14 @@ User.init(
       },
     },
     // Define a name column
-    name: {
+    first_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    last_name: {
       type: DataTypes.STRING,
       allowNull: true,
+      defaultValue: '',
     },
     // Define an email column
     email: {

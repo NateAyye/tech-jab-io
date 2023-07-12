@@ -97,6 +97,12 @@ const comments = [
     user_id: 15,
     post_id: 15,
   },
+  {
+    body: 'I love the way you captured the vibrant colors of the sunset. It looks like a painting from a museum!',
+    likes: 3,
+    user_id: 16,
+    post_id: 16,
+  },
 ];
 
 const seedComments = async () => await Comment.bulkCreate(comments);
