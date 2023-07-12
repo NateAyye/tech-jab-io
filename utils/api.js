@@ -3,11 +3,14 @@ const { User, Post, Comment } = require('../models');
 class ApiHelpers {
   constructor() {}
 
-  async getUsers(excludePassword = true) {
+  async getUsers(ord, ordBy, excludePassword = true) {
+    const order = ord === 'ASC' ? 'ASC' : 'DESC';
+    const orderBy = ordBy || 'createdAt';
     try {
       const users = await User.findAll({
         attributes: { exclude: excludePassword ? ['password'] : null },
         include: [{ model: Post }, { model: Comment }],
+        order: [[orderBy, order]],
       });
       return users;
     } catch (error) {
@@ -74,9 +77,12 @@ class ApiHelpers {
     }
   }
 
-  async getPosts(excludePassword = true) {
+  async getPosts(ord, ordBy, excludePassword = true) {
+    const order = ord === 'ASC' ? 'ASC' : 'DESC';
+    const orderBy = ordBy || 'createdAt';
     try {
       const posts = await Post.findAll({
+        order: [[orderBy, order]],
         include: [
           {
             model: User,

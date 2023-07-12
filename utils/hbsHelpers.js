@@ -27,4 +27,10 @@ module.exports = {
       .slice(0, Math.ceil(Math.max(Math.random() * 120, 75)))
       .concat('...');
   },
+  prev_page: (page) => {
+    return parseInt(page) - 1;
+  },
+  next_page: (page) => {
+    return parseInt(page) + 1;
+  },
 };
