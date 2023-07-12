@@ -2,20 +2,29 @@ const router = require('express').Router();
 const { User } = require('../../models');
 const api = require('../../utils/api');
 
-router.use('/signup', async (req, res) => {
+router.post('/sign-up', async (req, res) => {
   const foundUser = await api.getUserByEmail(req.body.email);
-
   if (foundUser)
     return res.status(409).json({ message: 'Email Already Exists!' });
 
-  const user = await api.createUser(req.body);
+  const userData = await api.createUser(req.body);
+  console.log(userData);
 
-  if (!user) return res.status(500).json({ message: 'Failed to create user' });
+  if (!userData)
+    return res.status(500).json({ message: 'Failed to create user' });
 
-  res.status(201).json({ message: 'User Signedup successfully', user });
+  // Save the session so the user can be logged in
+  req.session.save((err) => {
+    if (err) return res.status(500).json({ message: 'Failed to save session' });
+    const user = userData.get({ plain: true });
+    delete user.password;
+    req.session.loggedIn = true;
+    req.session.user = user;
+    res.status(201).json({ message: 'User Signedup successfully', user });
+  });
 });
 
-router.use('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   const foundUser = await api.getUserByEmail(email);
 
@@ -28,10 +37,17 @@ router.use('/login', async (req, res) => {
     return res.status(409).json({ message: 'Incorrect Password' });
 
   // TODO: Save the session so the user can be logged in
-  res.json({ message: `Logged in with email: ${email}`, user: foundUser });
+  req.session.save((err) => {
+    if (err) return res.status(500).json({ message: 'Failed to save session' });
+    const user = foundUser.get({ plain: true });
+    delete user.password;
+    req.session.loggedIn = true;
+    req.session.user = user;
+    res.json({ message: `Logged in with email: ${email}`, user: foundUser });
+  });
 });
 
-router.use('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
   if (res.session.loggedIn) {
     res.session.destroy(() => {
       res.status(204).end();

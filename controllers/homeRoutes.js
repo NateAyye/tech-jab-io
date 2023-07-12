@@ -1,6 +1,23 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
 
+router.get('/login', (req, res) => {
+  if (req?.session?.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('login', { layout: 'solo' });
+});
+router.get('/sign-up', (req, res) => {
+  if (req?.session?.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('sign-up', { layout: 'solo' });
+});
+
 router.get('^/$|/index(.html)?', async (req, res) => {
   const page = req.query.page || 1;
   const postsData = await Post.findAll({
@@ -27,7 +44,6 @@ router.get('^/$|/index(.html)?', async (req, res) => {
     }
     pagination.push({ page: i + 1, active: i + 1 === parseInt(page) });
   }
-
 
   const posts = postsData.map((post) => post.get({ plain: true }));
 
