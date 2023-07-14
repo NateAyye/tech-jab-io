@@ -133,6 +133,11 @@ User.init(
       allowNull: true,
       defaultValue: '',
     },
+    about: {
+      type: DataTypes.STRING(300),
+      allowNull: true,
+      defaultValue: 'What is your story?',
+    },
     // Define an email column
     email: {
       type: DataTypes.STRING,
