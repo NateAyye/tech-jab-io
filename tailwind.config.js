@@ -10,8 +10,8 @@ module.exports = {
       colors: {
         primary: {
           active: '#3cff',
-          main: '#348eda',
-          hover: '#276ca6',
+          main: '#34aefa',
+          hover: '#276cc9',
           disabled: '#081825',
         },
         secondary: {
@@ -28,8 +28,8 @@ module.exports = {
         },
         success: {
           active: '#a8e78c',
-          main: '#46e746',
-          hover: '#3ea05b',
+          main: '#59d146',
+          hover: '#3ac41a',
           disabled: '#203820',
         },
         warning: {
@@ -59,5 +59,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: ['@tailwindcss/forms', '@tailwindcss/typography'],
 };

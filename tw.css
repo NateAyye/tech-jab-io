@@ -16,4 +16,25 @@
     background-image: url(/images/hero-bg-light.svg);
     background-repeat: repeat;
   }
+
+  /* width */
+  .scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Track */
+  .scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #88888880;
+    border-radius: 9999px;
+  }
+
+  /* Handle on hover */
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #494949;
+  }
 }

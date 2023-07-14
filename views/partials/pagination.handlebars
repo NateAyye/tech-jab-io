@@ -23,7 +23,12 @@
           class='w-9 h-9 flex justify-center items-center border-r font-sans text-lg text-primary-hover'
         {{/if}}
       >
-        <a href='/?page={{page}}' class='font-sans text-lg'>{{page}}</a>
+        <a 
+        {{#if disabled}}
+        {{else}}
+        href='/?page={{page}}' 
+        {{/if}}
+        class='font-sans text-lg'>{{page}}</a>
       </li>
     {{/each}}
       <li

@@ -1,0 +1,11 @@
+<div>
+  <h1>Dashboard</h1>
+  <h2>Your Posts</h2>
+  <ul>
+    {{#each userPosts}}
+      <li>
+        <a href='/posts/{{id}}'>{{title}}</a>
+      </li>
+    {{/each}}
+  </ul>
+</div>

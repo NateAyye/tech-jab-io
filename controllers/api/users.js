@@ -49,10 +49,10 @@ router.post('/login', async (req, res) => {
 router.post('/logout', (req, res) => {
   if (req?.session?.loggedIn) {
     req.session.destroy(() => {
-      return res.status(204).json({ message: 'Logged out successfully' });
+      return res.status(204).end();
     });
   } else {
-    return res.status(404).json({ message: 'No session to end' });
+    return res.status(404).end();
   }
 });
 
@@ -84,9 +84,17 @@ router
     res.json({ message: 'User retrieved successfully', user });
   })
   .put(async (req, res) => {
-    const user = await api.updateUser(req.params.id, req.body);
-    if (!user) res.status(500).json({ message: 'Failed to update user' });
-    res.json({ message: 'User updated successfully', user });
+    console.log(req.params.id);
+    console.log(req.body);
+    const user = await api.updateUser(parseInt(req.params.id), req.body);
+    if (!user)
+      return res.status(500).json({ message: 'Failed to update user' });
+    req.session.save((err) => {
+      if (err)
+        return res.status(500).json({ message: 'Failed to save session' });
+      req.session.user = user.get({ plain: true });
+      res.json({ message: 'User updated successfully', user });
+    });
   })
   .delete(async (req, res) => {
     const user = await api.deleteUser(req.params.id);

@@ -12,7 +12,11 @@ router
     res.json(posts);
   })
   .post(async (req, res) => {
-    const post = await api.createPost(req.body);
+    const postData = {
+      user_id: req.session.user.id,
+      ...req.body,
+    };
+    const post = await api.createPost(postData);
     if (!post)
       return res.status(500).json({ message: 'Failed to create post' });
     res.json({ message: 'Post created successfully', post });
