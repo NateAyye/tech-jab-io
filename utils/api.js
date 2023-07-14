@@ -24,7 +24,48 @@ class ApiHelpers {
       const user = await User.findOne({
         where: { id },
         attributes: { exclude: excludePassword ? ['password'] : null },
-        include: [{ model: Post }, { model: Comment }],
+        include: [
+          {
+            model: Post,
+            include: [
+              {
+                model: User,
+                attributes: { exclude: ['password'] },
+              },
+              { model: Comment },
+            ],
+          },
+          {
+            model: Comment,
+            include: [{ model: User, attributes: { exclude: ['password'] } }],
+          },
+        ],
+      });
+      return user;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+  async getUserByUsername(username, excludePassword = true) {
+    try {
+      const user = await User.findOne({
+        where: { username },
+        attributes: { exclude: excludePassword ? ['password'] : null },
+        include: [
+          {
+            model: Post,
+            include: [
+              { model: Comment },
+              {
+                model: User,
+                attributes: { exclude: excludePassword ? ['password'] : null },
+              },
+            ],
+          },
+          { model: Comment },
+        ],
       });
       return user;
     } catch (error) {
@@ -148,6 +189,8 @@ class ApiHelpers {
           },
           {
             model: Comment,
+            order: [['createdAt', 'DESC']],
+            separate: true,
             include: [
               {
                 model: User,
