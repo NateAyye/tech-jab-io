@@ -3,6 +3,9 @@ const router = require('express').Router();
 // api routes
 router.use('/api', require('./api'));
 
+// user routes
+router.use('/users', require('./users'));
+
 // post pages routes
 router.use('/posts', require('./posts'));
 

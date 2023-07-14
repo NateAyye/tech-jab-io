@@ -1,5 +1,5 @@
 async function likePost(id) {
-  const btn = document.querySelectorAll(`button[data-post-id="${id}"]`)[0];
+  const btn = document.querySelectorAll(`button[onclick="likePost(${id})"]`)[0];
   const small = btn.querySelector('small');
   const likes = parseInt(btn.dataset.postLikes);
   const data = await fetch(`/api/posts/${id}`, {
@@ -17,7 +17,9 @@ async function likePost(id) {
   }
 }
 async function dislikePost(id) {
-  const btn = document.querySelectorAll(`button[data-post-id="${id}"]`)[1];
+  const btn = document.querySelectorAll(
+    `button[onclick="dislikePost(${id})"]`,
+  )[0];
   const small = btn.querySelector('small');
   const dislikes = parseInt(btn.dataset.postDislikes);
   const data = await fetch(`/api/posts/${id}`, {

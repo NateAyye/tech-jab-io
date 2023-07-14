@@ -12,7 +12,7 @@ async function loginUser(e) {
     body: JSON.stringify({ email, password }),
   });
   const data = await response.json();
-  
+
   if (response.ok) {
     responseEl.classList.add('!text-success-main');
     responseEl.textContent = 'Logged in successfully!!';
@@ -25,7 +25,7 @@ async function loginUser(e) {
     responseEl.textContent = data.message;
     setTimeout(() => {
       responseEl.innerHTML = '&ThickSpace;';
-    }, [3000]);
+    }, [2000]);
   }
 }
 

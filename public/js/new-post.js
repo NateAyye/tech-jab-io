@@ -13,25 +13,6 @@ const postForm = document.getElementById('post-form');
 postButton.addEventListener('click', async (event) => {
   event.preventDefault();
   confirmationDialog.showModal();
-  // const formData = new FormData(postForm);
-  // const post = {};
-  // formData.forEach((value, key) => {
-  //   post[key] = value;
-  // });
-
-  // const response = await fetch('/api/posts', {
-  //   method: 'POST',
-  //   body: formData,
-  //   headers: { 'Content-Type': 'multipart/form-data' },
-  // });
-
-  // const data = await response.json();
-
-  // if (response.ok) {
-  //   confirmationDialog.showModal();
-  // } else {
-
-  // }
 });
 
 confirmationDialogCancelButton.addEventListener('click', () => {
@@ -56,7 +37,7 @@ confirmationDialogConfirmButton.addEventListener('click', async (event) => {
 
   if (response.ok) {
     confirmationDialog.close();
-    location.reload();
+    location.replace('/dashboard');
   } else {
     console.log(data);
   }
