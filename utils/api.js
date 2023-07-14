@@ -59,8 +59,9 @@ class ApiHelpers {
 
   async updateUser(id, user) {
     try {
-      const updatedUser = await User.update(user, { where: { id } });
-      return updatedUser;
+      await User.update(user, { where: { id } });
+      const foundUser = await User.findOne({ where: { id } });
+      return foundUser;
     } catch (error) {
       console.log(error);
       return false;
@@ -82,6 +83,36 @@ class ApiHelpers {
     const orderBy = ordBy || 'createdAt';
     try {
       const posts = await Post.findAll({
+        order: [[orderBy, order]],
+        include: [
+          {
+            model: User,
+            attributes: { exclude: excludePassword ? ['password'] : null },
+          },
+          {
+            model: Comment,
+            include: [
+              {
+                model: User,
+                attributes: { exclude: excludePassword ? ['password'] : null },
+              },
+            ],
+          },
+        ],
+      });
+      return posts;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+  async getPostsByUserId(userId, ord, ordBy, excludePassword = true) {
+    const order = ord === 'ASC' ? 'ASC' : 'DESC';
+    const orderBy = ordBy || 'createdAt';
+    try {
+      const posts = await Post.findAll({
+        where: { user_id: userId },
         order: [[orderBy, order]],
         include: [
           {

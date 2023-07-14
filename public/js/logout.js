@@ -5,12 +5,12 @@ async function logoutUser() {
       'Content-Type': 'application/json',
     },
   });
-  const message = (await response.json()).message;
 
-  if (response.ok) {
+  if (response.status === 204) {
     location.replace('/');
   } else {
-    alert(message);
+    // TODO: Handle error with pop-up
+    alert('Failed to log out.');
   }
 }
 
