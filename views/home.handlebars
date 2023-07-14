@@ -16,9 +16,10 @@
                 class='text-xl text-dark-400 font-bold group-first-of-type:text-3xl hover:underline hover:underline-offset-2 hover:decoration-2'
               >{{title}}</h3>
             </a>
-            <small
-              class='text-secondary-main/75 text-sm/9 font-medium'
-            >{{format_date_lg createdAt}}</small>
+            <small class='text-secondary-main/75 text-sm/9 font-medium'><i
+                class='text-info-main fa-solid fa-calendar-day'
+              ></i>
+              {{format_date createdAt}}</small>
           </div>
           <p
             class='text-balance text-secondary-disabled indent-3 group-first-of-type:font-semibold group-first-of-type:text-lg group-first-of-type:text-dark-300'
@@ -50,33 +51,34 @@
             </div>
           </div>
           <footer class='flex justify-between items-center'>
-              <a
-                href='/post/{{id}}#comment-form'
+            <a
+              href='/posts/{{id}}#comment'
+              class='flex justify-center items-center w-6 h-6 rounded-full text-secondary-main hover:text-secondary-hover hover:drop-shadow-sm'
+            >
+              {{comments.length}}
+              <i class='fa-regular fa-comment'></i>
+            </a>
+            <div class='flex gap-8 items-center'>
+
+              <button
+                onclick='likePost({{id}})'
+                data-post-likes='{{likes}}'
+                data-post-id='{{id}}'
                 class='flex justify-center items-center w-6 h-6 rounded-full text-secondary-main hover:text-secondary-hover hover:drop-shadow-sm'
               >
-                <i class='fa-regular fa-comment'></i>
-              </a>
-              <div class='flex gap-8 items-center'>
-
-                <button
-                  onclick='likePost({{id}})'
-                  data-post-likes='{{likes}}'
-                  data-post-id='{{id}}'
-                  class='flex justify-center items-center w-6 h-6 rounded-full text-secondary-main hover:text-secondary-hover hover:drop-shadow-sm'
-                >
-                  <small>{{likes}}&ThickSpace;</small>
-                  <i class='fa-regular fa-thumbs-up -translate-y-[1px]'></i>
-                </button>
-                <button
-                  onclick='dislikePost({{id}})'
-                  data-post-dislikes='{{dislikes}}'
-                  data-post-id='{{id}}'
-                  class='flex justify-center items-center w-6 h-6 rounded-full text-secondary-main hover:text-secondary-hover hover:drop-shadow-sm'
-                >
-                  <small>{{dislikes}}&ThickSpace;</small>
-                  <i class='fa-regular fa-thumbs-down translate-y-[1px]'></i>
-                </button>
-              </div>
+                <small>{{likes}}&ThickSpace;</small>
+                <i class='fa-regular fa-thumbs-up -translate-y-[1px]'></i>
+              </button>
+              <button
+                onclick='dislikePost({{id}})'
+                data-post-dislikes='{{dislikes}}'
+                data-post-id='{{id}}'
+                class='flex justify-center items-center w-6 h-6 rounded-full text-secondary-main hover:text-secondary-hover hover:drop-shadow-sm'
+              >
+                <small>{{dislikes}}&ThickSpace;</small>
+                <i class='fa-regular fa-thumbs-down translate-y-[1px]'></i>
+              </button>
+            </div>
           </footer>
         </article>
       {{/each}}
@@ -117,39 +119,35 @@
           functionality.</p>
       </section>
       <section class='flex justify-between'>
-        <div class="flex justify-center items-center gap-3">
+        <div class='flex justify-center items-center gap-3'>
           <a
-            target="_blank"
+            target='_blank'
             title='MySQL Server Download'
             href='https://dev.mysql.com/downloads/mysql/'
           >
             <i class='link fa-solid fa-database'></i>
           </a>
-          <a
-            target="_blank"
-            title='Express.js'
-            href='https://expressjs.com/'
-          >
-            <i class="link fa-brands fa-node-js"></i>
+          <a target='_blank' title='Express.js' href='https://expressjs.com/'>
+            <i class='link fa-brands fa-node-js'></i>
           </a>
           <a
-            target="_blank"
+            target='_blank'
             title='Handlebars.js'
             href='https://handlebarsjs.com/'
           >
-            <i class="link fa-solid fa-h"></i>
+            <i class='link fa-solid fa-h'></i>
           </a>
           <a
-            target="_blank"
+            target='_blank'
             title='Node.js Download'
             href='https://nodejs.org/en'
           >
-            <i class="link fa-brands fa-node"></i>
+            <i class='link fa-brands fa-node'></i>
           </a>
         </div>
 
         <a
-          target="_blank"
+          target='_blank'
           title='See Source Code Here'
           href='https://github.com/NateAyye/tech-jab-io-blog'
         >
