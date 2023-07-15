@@ -172,6 +172,17 @@ User.init(
         return newUserData;
       },
     },
+    defaultScope: {
+      attributes: { exclude: ['password'] },
+    },
+    scopes: {
+      withPassword: {
+        attributes: {},
+      },
+      withoutPassword: {
+        attributes: { exclude: ['password'] },
+      },
+    },
     // TABLE CONFIGURATION OPTIONS GO HERE (https://sequelize.org/v5/manual/models-definition.html#configuration))
     sequelize,
     timestamps: true,

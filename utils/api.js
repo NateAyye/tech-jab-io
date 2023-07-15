@@ -3,87 +3,121 @@ const { User, Post, Comment } = require('../models');
 class ApiHelpers {
   constructor() {}
 
+  /***
+   * @description Get all users
+   * @param {string} ord - Order of results (ASC or DESC)
+   * @param {string} ordBy - Order by column (createdAt, updatedAt, etc.)
+   * @param {boolean} excludePassword - Exclude password from results (default: true)
+   * @returns {array} - Array of users
+   * @memberof ApiHelpers
+   * @function getUsers
+   * @example
+   * const users = await api.getUsers('ASC', 'createdAt');
+   * console.log(users);
+   * // [
+   * //   {
+   * //     id: 1,
+   * //     username: 'testuser1',
+   * //     email: 'testuser1@test',
+   * //     createdAt: 2021-08-03T20:00:00.000Z,
+   * //     updatedAt: 2021-08-03T20:00:00.000Z,
+   * //     posts: [
+   * //       ...
+   * //     ],
+   * //     comments: [
+   * //       ...
+   * //     ]
+   * //   },
+   * //   ...
+   * // ]
+   * */
   async getUsers(ord, ordBy, excludePassword = true) {
     const order = ord === 'ASC' ? 'ASC' : 'DESC';
     const orderBy = ordBy || 'createdAt';
     try {
-      const users = await User.findAll({
-        attributes: { exclude: excludePassword ? ['password'] : null },
+      const users = await User.scope(
+        excludePassword ? 'withoutPassword' : 'withPassword',
+      ).findAll({
         include: [{ model: Post }, { model: Comment }],
         order: [[orderBy, order]],
       });
       return users;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
 
+  /***
+   * @description Get a user by id
+   * @param {number} id - User id
+   * @param {boolean} excludePassword - Exclude password from results (default: true)
+   * @returns {object} - User object
+   * @memberof ApiHelpers
+   * @example
+   * const user = await api.getUser(1);
+   * console.log(user);
+   * // {
+   * //   id: 1,
+   * //   username: 'testuser1',
+   * //   avatar: 'https://via.placeholder.com/150',
+   * //   about: 'This is a test user',
+   * //   first_name: 'John',
+   * //   last_name: 'Fanklin',
+   * //   email: 'testuser1@test',
+   * //   createdAt: 2021-08-03T20:00:00.000Z,
+   * //   updatedAt: 2021-08-03T20:00:00.000Z,
+   * //   posts: [
+   * //     ...
+   * //   ],
+   * //   comments: [
+   * //     ...
+   * //   ]
+   * // }
+   */
   async getUser(id, excludePassword = true) {
     try {
-      const user = await User.findOne({
+      const user = await User.scope(
+        excludePassword ? 'withoutPassword' : 'withPassword',
+      ).findOne({
         where: { id },
-        attributes: { exclude: excludePassword ? ['password'] : null },
         include: [
-          {
-            model: Post,
-            include: [
-              {
-                model: User,
-                attributes: { exclude: ['password'] },
-              },
-              { model: Comment },
-            ],
-          },
-          {
-            model: Comment,
-            include: [{ model: User, attributes: { exclude: ['password'] } }],
-          },
+          { model: Post, include: [{ model: User }, { model: Comment }] },
+          { model: Comment, include: [{ model: User }] },
         ],
       });
       return user;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
 
   async getUserByUsername(username, excludePassword = true) {
     try {
-      const user = await User.findOne({
+      const user = await User.scope(
+        excludePassword ? 'withoutPassword' : 'withPassword',
+      ).findOne({
         where: { username },
-        attributes: { exclude: excludePassword ? ['password'] : null },
         include: [
-          {
-            model: Post,
-            include: [
-              { model: Comment },
-              {
-                model: User,
-                attributes: { exclude: excludePassword ? ['password'] : null },
-              },
-            ],
-          },
+          { model: Post, include: [{ model: Comment }, { model: User }] },
           { model: Comment },
         ],
       });
       return user;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
 
   async getUserByEmail(email, excludePassword = true) {
     try {
-      const user = await User.findOne({
+      const user = await User.scope(
+        excludePassword ? 'withoutPassword' : 'withPassword',
+      ).findOne({
         where: { email },
-        attributes: { exclude: excludePassword ? ['password'] : null },
         include: [{ model: Post }, { model: Comment }],
       });
       return user;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
@@ -93,7 +127,6 @@ class ApiHelpers {
       const newUser = await User.create(user);
       return newUser;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
@@ -104,7 +137,6 @@ class ApiHelpers {
       const foundUser = await User.findOne({ where: { id } });
       return foundUser;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
@@ -114,7 +146,6 @@ class ApiHelpers {
       const deletedUser = await User.destroy({ where: { id } });
       return deletedUser;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
@@ -126,29 +157,17 @@ class ApiHelpers {
       const posts = await Post.findAll({
         order: [[orderBy, order]],
         include: [
-          {
-            model: User,
-            attributes: { exclude: excludePassword ? ['password'] : null },
-          },
-          {
-            model: Comment,
-            include: [
-              {
-                model: User,
-                attributes: { exclude: excludePassword ? ['password'] : null },
-              },
-            ],
-          },
+          { model: User },
+          { model: Comment, include: [{ model: User }] },
         ],
       });
       return posts;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
 
-  async getPostsByUserId(userId, ord, ordBy, excludePassword = true) {
+  async getPostsByUserId(userId, ord, ordBy) {
     const order = ord === 'ASC' ? 'ASC' : 'DESC';
     const orderBy = ordBy || 'createdAt';
     try {
@@ -156,53 +175,32 @@ class ApiHelpers {
         where: { user_id: userId },
         order: [[orderBy, order]],
         include: [
-          {
-            model: User,
-            attributes: { exclude: excludePassword ? ['password'] : null },
-          },
-          {
-            model: Comment,
-            include: [
-              {
-                model: User,
-                attributes: { exclude: excludePassword ? ['password'] : null },
-              },
-            ],
-          },
+          { model: User },
+          { model: Comment, include: [{ model: User }] },
         ],
       });
       return posts;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
 
-  async getPost(id, excludePassword = true) {
+  async getPost(id) {
     try {
       const post = await Post.findOne({
         where: { id },
         include: [
-          {
-            model: User,
-            attributes: { exclude: excludePassword ? ['password'] : null },
-          },
+          { model: User },
           {
             model: Comment,
             order: [['createdAt', 'DESC']],
             separate: true,
-            include: [
-              {
-                model: User,
-                attributes: { exclude: excludePassword ? ['password'] : null },
-              },
-            ],
+            include: [{ model: User }],
           },
         ],
       });
       return post;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
@@ -212,7 +210,6 @@ class ApiHelpers {
       const newPost = await Post.create(post);
       return newPost;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
@@ -222,7 +219,6 @@ class ApiHelpers {
       const updatedPost = await Post.update(post, { where: { id } });
       return updatedPost;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
@@ -232,60 +228,29 @@ class ApiHelpers {
       const deletedPost = await Post.destroy({ where: { id } });
       return deletedPost;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
 
-  async getComments(excludePassword = true) {
+  async getComments() {
     try {
       const comments = await Comment.findAll({
-        include: [
-          {
-            model: User,
-            attributes: { exclude: excludePassword ? ['password'] : null },
-          },
-          {
-            model: Post,
-            include: [
-              {
-                model: User,
-                attributes: { exclude: excludePassword ? ['password'] : null },
-              },
-            ],
-          },
-        ],
+        include: [{ model: User }, { model: Post, include: [{ model: User }] }],
       });
       return comments;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
 
-  async getComment(id, excludePassword = true) {
+  async getComment(id) {
     try {
       const comment = await Comment.findOne({
         where: { id },
-        include: [
-          {
-            model: User,
-            attributes: { exclude: excludePassword ? ['password'] : null },
-          },
-          {
-            model: Post,
-            include: [
-              {
-                model: User,
-                attributes: { exclude: excludePassword ? ['password'] : null },
-              },
-            ],
-          },
-        ],
+        include: [{ model: User }, { model: Post, include: [{ model: User }] }],
       });
       return comment;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
@@ -295,7 +260,6 @@ class ApiHelpers {
       const newComment = await Comment.create(comment);
       return newComment;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
@@ -305,7 +269,6 @@ class ApiHelpers {
       const updatedComment = await Comment.update(comment, { where: { id } });
       return updatedComment;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
@@ -315,7 +278,6 @@ class ApiHelpers {
       const deletedComment = await Comment.destroy({ where: { id } });
       return deletedComment;
     } catch (error) {
-      console.log(error);
       return false;
     }
   }
