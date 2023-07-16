@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const api = require('../utils/api');
 
-router.get('/', (req, res) => {});
-
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
   const postData = await api.getPost(id);

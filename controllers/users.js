@@ -1,10 +1,6 @@
 const router = require('express').Router();
 const api = require('../utils/api');
 
-router.get('/', (req, res) => {
-  res.send('Hello from users');
-});
-
 router.get('/:username', async (req, res) => {
   const username = req.params.username;
   const data = await api.getUserByUsername(username);

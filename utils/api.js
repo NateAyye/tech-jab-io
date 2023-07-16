@@ -281,6 +281,17 @@ class ApiHelpers {
       return false;
     }
   }
+
+  getPagination(pages, currentPage) {
+    const pagination = [];
+
+    for (let i = 0; i < pages; i++) {
+      pagination.push({ page: i + 1, active: i + 1 === parseInt(currentPage) });
+      if (i === pages)
+        pagination.push({ page: '...', active: false, disabled: true });
+    }
+    return pagination;
+  }
 }
 
 module.exports = new ApiHelpers();

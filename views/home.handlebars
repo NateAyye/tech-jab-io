@@ -7,84 +7,9 @@
       class='grid gap-5 grid-cols-1 grid-rows-[masonry] sm:grid-cols-2 lg:grid-cols-3'
     >
       {{#each posts}}
-        <article
-          class='bg-light-100 rounded-lg shadow-lg h-fit px-8 py-3 space-y-5 sm:first:col-span-2 lg:first:col-span-3 group'
-        >
-          <div>
-            <a href='/posts/{{id}}'>
-              <h3
-                class='text-xl text-dark-400 font-bold group-first-of-type:text-3xl hover:underline hover:underline-offset-2 hover:decoration-2'
-              >{{title}}</h3>
-            </a>
-            <small class='text-secondary-main/75 text-sm/9 font-medium'><i
-                class='text-info-main fa-solid fa-calendar-day'
-              ></i>
-              {{format_date createdAt}}</small>
-          </div>
-          <p
-            class='text-balance text-secondary-disabled indent-3 group-first-of-type:font-semibold group-first-of-type:text-lg group-first-of-type:text-dark-300'
-          >
-            {{#if @first}}
-              {{body}}
-            {{else}}
-              {{format_body_random body}}
-            {{/if}}</p>
-          <div class='flex items-center gap-5'>
-            <a
-              class='rounded-full overflow-clip hover:ring-2 hover:ring-primary-main transition-all duration-150 ease-in-out group-first-of-type:ring-info-main'
-              href='/users/{{user.username}}'
-            >
-              <img
-                class='w-9 h-9'
-                alt="{{user.username}}\'s Avatar"
-                src='{{user.avatar}}'
-              />
-            </a>
-            <div class='flex flex-col'>
-              <a
-                href='/users/{{user.username}}'
-                class='text-sm font-bold text-secondary-disabled hover:text-secondary-hover hover:underline'
-              >{{user.first_name}} {{user.last_name}}</a>
-              <small
-                class='text-xs font-medium text-secondary-main'
-              >@{{user.username}}</small>
-            </div>
-          </div>
-          <footer class='flex justify-between items-center'>
-            <a
-              href='/posts/{{id}}#comment'
-              class='flex justify-center items-center w-6 h-6 rounded-full text-secondary-main hover:text-secondary-hover hover:drop-shadow-sm'
-            >
-              {{comments.length}}
-              <i class='fa-regular fa-comment'></i>
-            </a>
-            <div class='flex gap-8 items-center'>
-
-              <button
-                onclick='likePost({{id}})'
-                data-post-likes='{{likes}}'
-                data-post-id='{{id}}'
-                class='flex justify-center items-center w-6 h-6 rounded-full text-secondary-main hover:text-secondary-hover hover:drop-shadow-sm'
-              >
-                <small>{{likes}}&ThickSpace;</small>
-                <i class='fa-regular fa-thumbs-up -translate-y-[1px]'></i>
-              </button>
-              <button
-                onclick='dislikePost({{id}})'
-                data-post-dislikes='{{dislikes}}'
-                data-post-id='{{id}}'
-                class='flex justify-center items-center w-6 h-6 rounded-full text-secondary-main hover:text-secondary-hover hover:drop-shadow-sm'
-              >
-                <small>{{dislikes}}&ThickSpace;</small>
-                <i class='fa-regular fa-thumbs-down translate-y-[1px]'></i>
-              </button>
-            </div>
-          </footer>
-        </article>
+        {{> post}}
       {{/each}}
     </div>
-
-    <script src='/js/postLikes.js'></script>
 
     <div class='col-span-full mt-6 flex justify-end'>
       {{> pagination}}

@@ -1,49 +1,36 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
+const api = require('../utils/api');
 
 router.get('/login', (req, res) => {
-  if (req?.session?.loggedIn) {
-    res.redirect('/');
-    return;
-  }
-
+  if (req?.session?.loggedIn) return res.redirect('/');
   res.render('login', { layout: 'solo' });
 });
-router.get('/sign-up', (req, res) => {
-  if (req?.session?.loggedIn) {
-    res.redirect('/');
-    return;
-  }
 
+router.get('/sign-up', (req, res) => {
+  if (req?.session?.loggedIn) return res.redirect('/');
   res.render('sign-up', { layout: 'solo' });
 });
 
 router.get('^/$|/index(.html)?', async (req, res) => {
   const page = req.query.page || 1;
+  const postsCount = await Post.count();
+  const PAGE_SIZE = 16;
+  const pages = Math.ceil(postsCount / PAGE_SIZE);
+  const pagination = api.getPagination(pages, page);
+
   const postsData = await Post.findAll({
     include: [
-      { model: User, attributes: { exclude: ['password'] } },
+      { model: User },
       {
         model: Comment,
-        include: { model: User, attributes: { exclude: ['password'] } },
+        include: { model: User },
       },
     ],
-    limit: 16,
+    limit: PAGE_SIZE,
     order: [['createdAt', 'DESC']],
-    offset: (page - 1) * 16,
+    offset: (page - 1) * PAGE_SIZE,
   });
-  const postsCount = await Post.count();
-
-  const pages = Math.ceil(postsCount / 16);
-
-  const pagination = [];
-
-  for (let i = 0; i < pages; i++) {
-    if (i === pages - 1) {
-      pagination.push({ page: '...', active: false, disabled: true });
-    }
-    pagination.push({ page: i + 1, active: i + 1 === parseInt(page) });
-  }
 
   const posts = postsData.map((post) => post.get({ plain: true }));
 
