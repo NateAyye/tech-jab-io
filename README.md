@@ -73,11 +73,14 @@ External Link to FULL Example Video [Here!](https://drive.google.com/file/d/1V9i
 Home Page:
 ![Home Page](https://github.com/NateAyye/tech-jab-io/blob/main/public/images/home_page.png?raw=true)
 
-Tags API Video:
-![Login](https://github.com/NateAyye/tech-jab-io/blob/main/public/images/Tags_API.png?raw=true)
+Sign up :
+![Sign Up](https://github.com/NateAyye/tech-jab-io/blob/main/public/images/Tags_API.png?raw=true)
 
-Category API Video:
-[![Setup Video](https://github.com/NateAyye/tech-jab-io/blob/main/public/images/Category_API.png?raw=true)](https://drive.google.com/file/d/1lIrtqzI6qugvt1twVLpiYtFerAFan7Nd/view?usp=sharing)
+Create a new post on Your Profile:
+![Create Your First Post](https://github.com/NateAyye/tech-jab-io/blob/main/public/images/new_post.png?raw=true)
+
+Comment on Other peoples posts:
+![Comment on other peopls posts](https://github.com/NateAyye/tech-jab-io/blob/main/public/images/comment_post.png?raw=true)
 
 ## Contribution
 
