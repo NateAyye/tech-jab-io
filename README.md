@@ -1,6 +1,6 @@
 # Tech Jab IO Blog
 
-![GitHub](https://img.shields.io/github/license/NateAyye/tech-jab-io)
+![GitHub](https://img.shields.io/github/license/NateAyye/tech-jab-io?label=License)
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![Insomnia](https://img.shields.io/badge/Insomnia-black?style=for-the-badge&logo=insomnia&logoColor=5849BE)
@@ -35,7 +35,7 @@ You can install this locally and run your very own version of it by running:
 > Note: You will need to have [MySQL](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html) installed on your machine to run this.
 
 ```
-git clone https://github.com/NateAyye/tech-jab-I0.git
+git clone https://github.com/NateAyye/tech-jab-io.git
 cd tech-jab-I0
 npm install
 ```
