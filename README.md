@@ -1,6 +1,6 @@
 # Tech Jab IO Blog
 
-![GitHub](https://img.shields.io/github/license/NateAyye/e-commerce-backend?label=License)
+![GitHub](https://img.shields.io/github/license/NateAyye/tech-jab-io?label=License)
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![Insomnia](https://img.shields.io/badge/Insomnia-black?style=for-the-badge&logo=insomnia&logoColor=5849BE)
