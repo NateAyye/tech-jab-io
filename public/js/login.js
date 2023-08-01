@@ -18,7 +18,7 @@ async function loginUser(e) {
     responseEl.textContent = 'Logged in successfully!!';
     setTimeout(() => {
       responseEl.innerHTML = '&ThickSpace;';
-      location.replace('/');
+      location.replace('/dashboard');
     }, [1500]);
   } else {
     responseEl.classList.remove('!text-success-main');

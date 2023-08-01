@@ -19,7 +19,7 @@ async function signUpUser(e) {
     responseEl.textContent = message;
     setTimeout(() => {
       responseEl.innerHTML = '&ThickSpace;';
-      location.replace('/');
+      location.replace('/dashboard');
     }, [1500]);
   } else {
     responseEl.classList.remove('!text-success-main');
